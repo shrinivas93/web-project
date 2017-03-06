@@ -9,8 +9,6 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<import resource="springContext.xml" />
-	<import resource="beanContext.xml" />
-	<import resource="dbContext.xml" />
+	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
 
 </beans>

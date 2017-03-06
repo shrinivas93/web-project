@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
-  <servlet>
-    <servlet-name>rest</servlet-name>
-    <servlet-class>org.springframework.data.rest.webmvc.RepositoryRestDispatcherServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>rest</servlet-name>
-    <url-pattern>/*</url-pattern>
-  </servlet-mapping>
+<!-- This web.xml file is not required when using Servlet 3.0 container, 
+	see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>web-project</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>rest</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.foo.bar</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.server.provider.classnames</param-name>
+			<param-value>org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
 </web-app>
